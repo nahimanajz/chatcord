@@ -1,12 +1,15 @@
 const path = require('path');
 const http = require('http');
 const express  = require('express');
-const socketio = require('socket.io');
+// const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
 const { getCurrentUser, getRoomUsers, userJoin, userLeave} = require('./utils/users');
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = require('socket.io').listen(server);
+app.get('/api', function(req, res){
+   res.send('welcome');
+})
 //set static folder----------
 app.use(express.static(path.join(__dirname, 'public')))
 const botName = `Chat Bot`;
